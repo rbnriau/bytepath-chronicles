@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UFW y Fail2ban: Instalación y configuración</title>
+    <meta name="description" content="Instalación y configuración de UFW y Fail2ban">
+
+    <meta name="keywords"
+        content="tecnologia, programación, linux, cloud, seguridad, desarrollo web, DevOps, ciberseguridad, The BytePath Chronicles, tutorial, guia">
+
+    <link rel="canonical" href="https://www.thebytepathchronicles.com/ruta-completa-al-articulo.html">
+
+    <link rel="icon" href="/imagenes/varios/escudo_azul.svg" type="image/x-icon">
+
+
+    <meta property="og:title" content="UFW y Fail2ban: Seguridad básica">
+    <meta property="og:description" content="Instalación y configuración básiva de UFW y Fail2ban.">
+    <meta property="og:image" content="https://www.thebytepathchronicles.com/assets/images/thumbnail-articulo.jpg">
+    <meta property="og:url" content="https://www.thebytepathchronicles.com/ruta-completa-al-articulo.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The BytePath Chronicles">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@TuUsuarioTwitter">
+    <meta name="twitter:creator" content="@TuUsuarioTwitter">
+    <meta name="twitter:title" content="Título del Artículo en Twitter">
+    <meta name="twitter:description" content="Portada y acceso al sitio web The BytePath Chronicles.">
+    <meta name="twitter:image"
+        content="https://www.thebytepathchronicles.com/assets/images/thumbnail-articulo-twitter.jpg">
+    <link rel="stylesheet" href="/estilos.css" />
+</head>
+
+<body>
+    <img id="main-background-image" src="/imagenes/portadas/A1C2N00-background-1200px.webp" srcset="/imagenes/portadas/A1C2N00-background-400px.webp 400w,
+             /imagenes/portadas/A1C2N00-background-800px.webp 800w,
+             /imagenes/portadas/A1C2N00-background-1200px.webp 1200w,
+             /imagenes/portadas/A1C2N00-background-1800px.webp 1800w,
+             /imagenes/portadas/A1C2N00-background-2400px.webp 2400w" sizes="(max-width: 600px) 100vw,
+            (max-width: 1200px) 70vw,
+            100vw" alt="Imagen de portada del articulo sobre seguridad básica">
+    <header>
+        <div class="header-left-group">
+            <a href="/index.html" class="logo-link">
+                <img src="/imagenes/varios/escudo_azul.svg" alt="Logo de The BytePath Chronicles" class="site-logo">
+            </a>
+            <div class="site-title">The BytePath Chronicles</div>
+            
+        </div>
+            
+        <nav class="main-nav">
+            <ul>
+
+                <li><a href="/bitacora.html">Mis Apuntes</a></li>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="proyecto.html">Proyecto</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main class="contenido">
+        <h1>UFW y Fail2Ban: El escudo Invisible</h1>
+        <p>'El acceso físico está comprometido,' murmuró Amin,'Cualquiera podría encontrarlo.Y aunque la autenticación
+            por clave es robusta, una vez que encuentren la IP, los ataques de fuerza bruta serán cuestión de tiempo.'
+        </p>
+        <p>Lara asintió. 'Lo sé. Es un riesgo calculado, pero podemos mitigarlo. Necesitamos fortificar ese acceso
+            lógico. Crear un escudo, una barrera invisible que repela los intentos de intrusión. No hay tiempo para
+            sutilezas, pero sí para lo esencial.'</p>
+        <p>Amin entendió. '¿Un firewall y algo que los bloquee?'</p>
+        <p>'Exacto,' respondió Lara, sacando su portátil. 'UFW para el firewall, y Fail2ban para los ataques
+            persistentes.</p>
+        <h2>Instalación de UFW y Fail2ban</h2>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">┌──(lara㉿kali)-[~]</span>
+<span class="prompt">└─$ ssh amin@192.168.8.101
+</span>
+
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo apt update
+Hit:1 http://deb.debian.org/debian bookworm InRelease
+Hit:2 http://deb.debian.org/debian bookworm-updates InRelease
+Hit:3 http://deb.debian.org/debian-security bookworm-security InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt"></span>~$ sudo apt install ufw fail2ban -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libiptc0 libnfnetlink0 libxtables12 python3-systemd python3-pyinotify rsyslog
+Suggested packages:
+  tcpd libclamav-client-perl
+The following NEW packages will be installed:
+  fail2ban libiptc0 libnfnetlink0 libxtables12 python3-systemd python3-pyinotify rsyslog ufw
+0 upgraded, 9 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1,985 kB of archives.
+After this operation, 9,332 kB of additional disk space will be used.
+........
+Processing triggers for man-db (2.11.2-1) ...
+Processing triggers for libc-bin (2.36-9+deb12u3) ...
+</span>
+
+
+       </code>
+            </div>
+        </div>
+        <h2>Configuración de UFW: La Barrera Exterior</h2>
+        <p>"Con UFW ya instalado, Lara procedió a fortificar el servidor. La prioridad era establecer una política de
+            denegación por defecto para el tráfico entrante, asegurando que solo lo explícitamente permitido pudiera
+            pasar. El puerto SSH, la puerta de entrada remota que los conectaba con el servidor, era la excepción
+            crucial. Sin él, estarían ciegos y aislados.</p>
+        <p>Primero, lo básico,' comentó Lara, tecleando rápidamente. 'Denegar todo lo que no conozcamos, y permitir
+            nuestra conexión. No podemos permitirnos un error que nos deje fuera del sistema.'"</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">┌──(lara㉿kali)-[~]</span>
+<span class="prompt">└─$ ssh amin@192.168.8.101
+</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt"></span>~$ sudo ufw default deny incoming
+Default incoming policy changed to 'deny' (active)
+</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt"></span>~$ sudo ufw default allow outgoing
+Default outgoing policy changed to 'allow' (active)
+</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt"></span>~$ sudo ufw allow ssh
+Rule added
+Rule added (v6)
+</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt"></span>~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall enabled and active on system startup
+</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt"></span>~$ sudo ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW       Anywhere                  
+22/tcp (v6)                ALLOW       Anywhere (v6)   
+</span>
+<span class="output">amin@1-bytepath:</span>
+        </code>
+            </div>
+        </div>
+
+        <h2>Configuración de Fail2ban: El Centinela Agresivo</h2>
+        <p>Con la barrera exterior de UFW levantada, Lara se enfocó en el segundo componente de su defensa: Fail2ban. Si
+            UFW era el muro, Fail2ban era el centinela vigilante, capaz de detectar a los asaltantes persistentes y
+            castigarlos bloqueándolos temporalmente. Su misión principal era proteger el puerto SSH de los ataques de
+            fuerza bruta, pero su flexibilidad le permitiría proteger otros servicios en el futuro.</p>
+        <p>Ahora, el ojo que todo lo ve,' explicó Lara a Amin. 'Fail2ban monitoreará los intentos fallidos de acceso.
+            Demasiados errores y el atacante será bloqueado automáticamente. Es una defensa proactiva contra los
+            intentos sistemáticos de adivinar nuestra clave.'"</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">┌──(lara㉿kali)-[~]</span>
+<span class="prompt">└─$ ssh amin@192.168.8.101
+</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt"></span>~$ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+</span>
+<span class="output">amin@1-bytepath:</span>
+        </code>
+            </div>
+        </div>
+        <p>Lara creó una copia del archivo de configuración principal de Fail2ban (jail.conf) a jail.local. Este es un
+            paso estándar y recomendado; permite modificar las configuraciones de Fail2ban sin riesgo de que los cambios
+            sean borrados por una actualización del sistema. El archivo jail.local sobrescribe las configuraciones de
+            jail.conf.</p>
+        <p>Ahora, Lara editará el archivo jail.local para ajustar las configuraciones globales y habilitar la protección
+            SSH.</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt"></span>~$ sudo nano /etc/fail2ban/jail.local
+</span>
+        </code>
+            </div>
+        </div>
+        <p>Dentro de jail.local, Lara buscaría o añadiría las siguientes líneas para configurar el comportamiento
+            básico:</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span># CONTENIDO DEL ARCHIVO /etc/fail2ban/jail.local (solo las partes relevantes)
+
+# Configuración global
+[DEFAULT]
+# Duración del baneo (en segundos)
+bantime = 1h
+
+# Número de intentos fallidos antes del baneo
+maxretry = 5
+
+# Intervalo de tiempo para los reintentos
+findtime = 10m
+
+# Acciones a tomar (email, firewall, etc.). '%(action_mwl)s' por defecto.
+# Puedes añadir 'action = %(action_mwl)s %(mta)s[name=sshd,dest=tu_email@example.com]' si quieres emails
+action = %(action_mwl)s
+
+# Ignorar IPs
+# ignoreip = 127.0.0.1/8 ::1 192.168.8.0/24 # <-- IMPORTANTE: Si conoces IPs seguras (ej. tu propia IP estática, la red de tu portátil), añádelas aquí.
+
+# Habilitar la jaula SSH
+[sshd]
+enabled = true
+
+# Puedes ajustar el puerto si no es el 22 por defecto
+# port = ssh
+# logpath = %(sshd_log)s
+# backend = %(sshd_backend)s
+
+# [OTRAS JAULAS COMO NGINX, APACHE, ETC. ESTARÍAN DESHABILITADAS POR DEFECTO O CONFIGURADAS MÁS TARDE]
+           </span>
+           </code>
+            </div>
+        </div>
+        <h3>Explicación de las configuraciones clave en jail.local:</h3>
+        <ul>
+            <li><strong>bantime = 1h</strong> Lara configuró el tiempo de baneo a 1 hora. Esto significa que una IP
+                bloqueada por Fail2ban no podrá intentar conectarse de nuevo durante 60 minutos.</li>
+            <li><strong>maxretry = 5</strong>Estableció el número máximo de intentos fallidos a 5. Después de 5 intentos
+                fallidos en un periodo de findtime, la IP será baneada.</li>
+            <li><strong>findtime = 10m</strong>Definición del intervalo de tiempo en el que se cuentan los maxretry. Si
+                un atacante realiza 5 intentos fallidos en 10 minutos, será baneado.</li>
+            <li><strong>ignoreip = ...</strong>Esta línea es crucial. Lara recordó la importancia de añadir IPs que
+                nunca debieran ser baneadas (por ejemplo, la IP de su propio portátil si fuera estática, o rangos de red
+                conocidos y seguros). De lo contrario, si ellos mismos cometen errores, podrían autobloquearse.</li>
+            <li><strong>[sshd] y enabled = true</strong> Finalmente, Lara habilitó la "jaula" (jail) específica para el
+                servicio SSH (sshd). Esto le dice a Fail2ban que empiece a monitorear los logs de SSH para detectar
+                intentos de acceso fallidos.</li>
+
+        </ul>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt"></span>~$ sudo systemctl restart fail2ban
+</span>
+<span class="output">amin@1-bytepath:</span>
+        </code>
+            </div>
+        </div>
+        <p>El servidor de Amin tenía ahora dos capas de protección digital. UFW, el muro que decidía quién entraba y
+            quién no. Y Fail2ban, el centinela silencioso, siempre atento a los lobos que rondaran la puerta.</p>
+        <p>Un respiro.</p>
+        <p>No era Arcadia, pero era un comienzo.</p>
+        <p>Con las herramientas en su lugar y las defensas activas, Lara y Amin sabían que su pequeño nodo en el
+            desierto estaba tan seguro como podía estarlo.</p>
+        <p>El sol casi había desaparecido, y el crepúsculo envolvía el antiguo peaje. La carretera, antes una arteria de
+            comercio, ahora se extendía vacía y silenciosa hacia el horizonte incierto.</p>
+        <p>Un nuevo tramo del viaje les esperaba, y con cada kilómetro, la esperanza de Arcadia brillaba un poco más.
+        </p>
+        <!-- FLECHAS PREV/NEXT -->
+        <div class="article-navigation">
+
+            <a href="instalacion_servidor.html" class="nav-arrow-prev" id="prev-chapter-link" <h3>PREV..</h3></a>
+
+            <a href="apache2.html" class="nav-arrow-next" id="next-chapter-link" <h3>NEXT..</h3></a>
+        </div>
+
+    </main>
+
+
+
+    <footer>
+        <div class="social-links">
+                <a href="" target="_blank" aria-label="Mi perfil de LinkedIn">LinkedIn</a>
+                <a href="" target="_blank" aria-label="Mi perfil de GitHub">GitHub</a>
+        </div>
+        <p>
+            &copy; 2025 Ruben Riau Vicente. The BytePath Chronicles. Contenido bajo 
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">Licencia CC 4.0</a>
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank"
+                rel="license noopener noreferrer">
+                <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png"
+                    alt="Licencia Creative Commons Atribución-Compartir Igual 4.0 Internacional" class="cc-button">
+            </a>
+        </p>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const article = document.querySelector('.contenido'); // Selecciona tu artículo
+            if (article) {
+                // Espera X milisegundos (ej. 1500 = 1.5 segundos) antes de añadir la clase
+                setTimeout(() => {
+                    article.classList.add('contenido-visible'); // ¡Añade la nueva clase aquí!
+                }, 500); // Ajusta este tiempo de retardo inicial como prefieras
+            }
+        });
+    </script>
+
+</body>
+
+</html>

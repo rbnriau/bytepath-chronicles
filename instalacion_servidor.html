@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debian 12: Instalación del Servidor | The BytePath Chronicles</title>
+    <meta name="description" content="Introducción y preparación del entorno">
+
+    <meta name="keywords"
+        content="tecnologia, programación, linux, cloud, seguridad, desarrollo web, DevOps, ciberseguridad, The BytePath Chronicles, tutorial, guia">
+
+    <link rel="canonical" href="https://www.thebytepathchronicles.com/ruta-completa-al-articulo.html">
+
+    <link rel="icon" href="/imagenes/varios/escudo_azul.svg" type="image/x-icon">
+
+
+    <meta property="og:title" content="Debian 12: Instalación Servidor (I) | BytePath">
+    <meta property="og:description" content="Instalación y configuración básica de servidor web local.">
+    <meta property="og:image" content="https://www.thebytepathchronicles.com/assets/images/thumbnail-articulo.jpg">
+    <meta property="og:url" content="https://www.thebytepathchronicles.com/ruta-completa-al-articulo.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The BytePath Chronicles">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@TuUsuarioTwitter">
+    <meta name="twitter:creator" content="@TuUsuarioTwitter">
+    <meta name="twitter:title" content="Título del Artículo en Twitter">
+    <meta name="twitter:description" content="Instalación y configuración básica de servidor web local.">
+    <meta name="twitter:image"
+        content="https://www.thebytepathchronicles.com/assets/images/thumbnail-articulo-twitter.jpg">
+    <link rel="stylesheet" href="/estilos.css" />
+</head>
+
+<body>
+
+    <img id="main-background-image" src="/imagenes/portadas/A1C1N00-background-1200px.webp" srcset="/imagenes/portadas/A1C1N00-background-400px.webp 400w,
+             /imagenes/portadas/A1C1N00-background-800px.webp 800w,
+             /imagenes/portadas/A1C1N00-background-1200px.webp 1200w,
+             /imagenes/portadas/A1C1N00-background-1800px.webp 1800w,
+             /imagenes/portadas/A1C1N00-background-2400px.webp 2400w" sizes="(max-width: 600px) 100vw,
+            (max-width: 1200px) 70vw,
+            100vw" <alt="Imagen de fondo del capitulo 1">
+    <header>
+        <div class="header-left-group">
+            <a href="/index.html" class="logo-link">
+                <img src="/imagenes/varios/escudo_azul.svg" alt="Logo de The BytePath Chronicles" class="site-logo">
+            </a>
+            <div class="site-title">The BytePath Chronicles</div>
+            
+        </div>
+            
+        <nav class="main-nav">
+            <ul>
+
+                <li><a href="/bitacora.html">Mis Apuntes</a></li>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="proyecto.html">Proyecto</a></li>
+            </ul>
+        </nav>
+
+    </header>
+    <main class="contenido">
+        <h1>Debian 12: Instalación del Servidor</h1>
+        <h2>El Corazón de la Bestia</h2>
+
+        <!--Introducción a la aventura-->
+
+        <p>Tras <strong>El Eclipse Digital</strong>, cada nodo reactivado es una chispa de orden en medio del caos. El
+            primer paso: levantar un servidor funcional y establecer una conexión remota segura.</p>
+        <p>El sistema elegido es <strong>Debian 12</strong>, estable, conocido, resiliente. Un pilar fiable para
+            reconstruir servicios esenciales.</p>
+        <p>La terminal será la interfaz clave: texto puro, sin distracciones. Cada comando ejecutado no solo configura
+            una máquina, sino que restablece un fragmento del mundo anterior.</p>
+        <p>Es hora de comenzar la secuencia de inicialización.</p>
+        <br>
+
+
+        <!--emulador de termianl-->
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">El Despertar y la
+                    Renovación</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="prompt">root@1-bytepath</span><span class="prompt">~# apt update</span>
+<span class="prompt">root@1-bytepath</span><span class="prompt">~# apt upgrade -y</span>
+
+       </code>
+            </div>
+        </div>
+
+
+        <!--Establer hostname e IP estática-->
+
+        <h2>Asignación de Identidad y Ubicación</h2>
+        <p>Es momento de definir un <strong>hostname</strong>, el identificador único del sistema dentro de la red, y
+            configurar una <strong>IP estática</strong> para garantizar su localización constante.</p>
+        <p>Estos parámetros actúan como las coordenadas permanentes de un nodo: permiten que otros sistemas puedan
+            detectarlo, comunicarse con él y mantener su rol dentro de la infraestructura.</p>
+        <br>
+        <!--emulador de termianl-->
+
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Identidad y Anclaje
+                    Local</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="prompt">root@1-bytepath</span><span class="prompt">~# nano /etc/hostname
+</span>
+<span class="prompt">root@1-bytepath</span><span class="prompt">~# hostname
+1-bytepath
+</span>
+
+       </code>
+            </div>
+        </div>
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Identidad y Anclaje
+                    Local</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="prompt">root@1-bytepath</span><span class="prompt">~# nano /etc/network/interfaces</span>
+<span class="prompt">root@1-bytepath</span><span class="prompt">~# # This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug enp3s0
+iface enp3s0 inet static
+  address 192.168.8.150
+  netmask 255.255.255.0
+  gateway 192.168.8.1
+  dns-nameservers 192.168.8.1
+</span>
+
+       </code>
+            </div>
+        </div>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Identidad y Anclaje
+                    Local</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="prompt">root@1-bytepath</span><span class="prompt">~# ping 192.168.8.1
+PING 192.168.8.1 (192.168.8.1) 56(84) bytes of data.
+64 bytes from 192.168.8.1: icmp_seq=1 ttl=64 time=0.421 ms
+64 bytes from 192.168.8.1: icmp_seq=2 ttl=64 time=0.700 ms
+64 bytes from 192.168.8.1: icmp_seq=3 ttl=64 time=0.699 ms
+64 bytes from 192.168.8.1: icmp_seq=4 ttl=64 time=0.703 ms
+^C
+--- 192.168.8.1 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3073ms
+rtt min/avg/max/mdev = 0.421/0.630/0.703/0.121 ms</span>
+
+
+       </code>
+            </div>
+        </div>
+
+        <!-- Instalación de sudo y autenticación-->
+
+        <h2>Elevación de Privilegios: Acceso Administrativo</h2>
+
+        <p>Para intervenir con libertad total sobre el sistema, Lara y Amin deben habilitar los permisos
+            administrativos. En un entorno donde cada cambio puede afectar al núcleo del servidor, el control granular
+            es esencial.</p>
+
+        <p>— Si algo va mal, necesitaremos intervenir al instante —murmura Lara, revisando su terminal—. No podemos
+            depender de una cuenta root aislada.</p>
+
+        <p>Amin asiente. El primer paso es instalar <strong>sudo</strong>, una herramienta que permite ejecutar comandos
+            con privilegios de superusuario desde una cuenta estándar. De este modo, pueden mantener seguridad y
+            flexibilidad.</p>
+
+        <p>Una vez instalada, debe añadirse su usuario al grupo correspondiente. Es una operación sencilla, pero marca
+            un punto de no retorno: a partir de aquí, las decisiones tendrán el poder de reconstruir... o colapsar el
+            sistema.</p>
+        <br>
+
+        <!--Emunaldor de Terminal-->
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Concediendo
+                    Privilegios de Superusuario</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="prompt">root@1-bytepath</span><span class="prompt">~# apt install sudo</span>
+<span class="prompt">root@1-bytepath</span><span class="prompt">~# usermod -aG sudo amin</span>
+
+       </code>
+            </div>
+        </div>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Reinicio de
+                    sistema</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="prompt">root@1-bytepath</span><span class="prompt">~# reboot</span>
+        </code>
+            </div>
+        </div>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Login correcto</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ </span>
+       </code>
+            </div>
+        </div>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Grupo 27 (sudo)</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ id amin
+uid=1000(amin) gid=1000(amin) grupos=1000(amin),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),33(www-data),44(video),46(plugdev),100(users),106(netdev)
+</span>
+       </code>
+            </div>
+        </div>
+
+
+
+        <!--Instalacion de SSH-->
+
+
+        <h2>Habilitando el Acceso Seguro: Configuración del Canal SSH</h2>
+
+        <p>Con el sistema operativo en funcionamiento y la red local estabilizada, el siguiente paso es establecer un
+            método seguro de acceso remoto. Lara y Amin saben que dejar la puerta abierta sin protección no es una
+            opción.</p>
+
+        <p>— Podríamos usar contraseñas, pero... ya sabes lo fácil que es capturar una si no hay cifrado —dice Amin,
+            tecleando sin levantar la vista.</p>
+
+        <p>— Por eso usaremos SSH con autenticación por clave pública. Nadie cruza sin tener la llave correcta —responde
+            Lara, mientras prepara el archivo de configuración.</p>
+
+        <p><strong>OpenSSH</strong> es el protocolo estándar para conexiones remotas seguras. Al instalar y activar su
+            servicio, el servidor aceptará conexiones cifradas, evitando que credenciales o comandos sean interceptados.
+        </p>
+
+        <p>La autenticación por clave añade una capa crítica de seguridad. En lugar de depender únicamente de
+            contraseñas, el acceso se controla mediante un par de claves: una pública que se copia al servidor y una
+            privada que permanece en el equipo del administrador.</p>
+
+        <p>Es el momento de instalar el servicio y preparar el primer acceso cifrado. A partir de aquí, el servidor
+            podrá ser controlado de forma remota con confidencialidad e integridad garantizadas.</p>
+        <br>
+        <!--Terminal-->
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">El Despertar y la
+                    Renovación</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo apt install openssh-server</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$</span>
+
+       </code>
+            </div>
+        </div>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">El Despertar y la
+                    Renovación</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo systemctl status sshd
+[sudo] contraseña para amin: 
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; preset: enabled)
+     Active: active (running) since Sun 2025-06-08 21:25:39 CEST; 55min ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+    Process: 480 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)
+   Main PID: 506 (sshd)
+      Tasks: 1 (limit: 4421)
+     Memory: 12.5M
+        CPU: 582ms
+     CGroup: /system.slice/ssh.service
+             └─506 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+jun 08 21:25:39 1-bytepath sshd[506]: Server listening on :: port 22.
+jun 08 21:25:39 1-bytepath systemd[1]: Started ssh.service - OpenBSD Secure Shell server.
+</span>
+        </code>
+            </div>
+        </div>
+
+        <!--comprobar conexion ssh con contraseña-->
+
+        <h2>La Primera Conexión: Verificando el Canal</h2>
+
+        <p>Con el servicio <strong>SSH</strong> instalado y activo, ha llegado el momento de comprobar que la puerta
+            remota responde. Esta primera conexión, aunque temporalmente basada en contraseña, es crucial para validar
+            que el canal está operativo y que el servidor escucha desde su nuevo puesto en la red.</p>
+
+        <p>Lara abre su terminal desde un nodo cercano. Teclea el comando, introduce las credenciales de Amin y aguarda
+            una fracción de segundo: una breve pausa cargada de tensión.</p>
+
+        <p>— Si entra, es que la red, el demonio SSH y el firewall están alineados —murmura Amin, siguiendo la salida de
+            la terminal con atención.</p>
+
+        <p>Una conexión exitosa no solo confirma que la máquina es accesible, sino que allana el camino para el próximo
+            paso: la implementación de autenticación por clave pública, más robusta y resistente a ataques.</p>
+
+        <p>Por ahora, este enlace es funcional… pero temporal. Es solo un puente provisional hacia un acceso
+            verdaderamente seguro.</p>
+        <br>
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">El Despertar y la
+                    Renovación</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">lara@kali:</span><span class="prompt">~$ ssh amin@192.168.8.150</span>
+<span class="output">lara@kali:</span><span class="prompt">~$ The authenticity of host '192.168.8.156 (192.168.8.156)' can't be established.
+ED25519 key fingerprint is SHA256:iK3eMxXpXVC/E6/23Whpschi06qHs2w4LR0ZXGbq/eQ.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?yes
+Warning: Permanently added '192.168.8.101' (ED25519) to the list of known hosts.
+amin@192.168.8.101's password:
+Linux debian 6.1.0-37-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.140-1 (2025-05-22) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon Jun  9 16:59:42 2025</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$</span>
+
+       </code>
+            </div>
+        </div>
+        <p>Una ráfaga de texto en la pantalla confirma el éxito. La conexión se establece, y la visión de la terminal de
+            Amin se proyecta ante los ojos de Lara. El camino remoto está abierto.</p>
+
+        <!--generar key-->
+
+        <h2>Forja de Claves: Cerraduras Cuánticas para Puertas Digitales</h2>
+
+        <p>La conexión por contraseña había funcionado, sí. Pero para Lara, aquello era apenas una prueba de vida, no
+            una solución duradera. Las contraseñas, incluso las complejas, eran residuos de una era más frágil.</p>
+
+        <p>Sentada frente a su terminal, ejecutó con precisión el comando que generaría su firma criptográfica: un par
+            de <strong>claves ED25519</strong>. Este algoritmo moderno, eficiente y resistente incluso ante ataques
+            cuánticos teóricos, sería el nuevo candado que sellaría el acceso remoto.</p>
+
+        <p>— Nada que se recuerde debería proteger un sistema —dijo en voz baja, mientras el cursor parpadeaba al compás
+            de la generación de la clave.</p>
+
+        <p>Amin asintió, sabiendo que lo que estaban construyendo no era solo un servidor, sino una frontera segura. Una
+            vez instalada la clave pública en su máquina, cerraría la puerta antigua de las contraseñas. Para siempre.
+        </p>
+
+        <p>Ahora es tu turno. Sigue los pasos de Lara y genera tus propias llaves criptográficas. A partir de aquí, solo
+            las firmas irrefutables abrirán las compuertas de tu sistema.</p>
+        <br>
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">El Despertar y la
+                    Renovación</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">┌──(lara㉿kali)-[~]</span><span class="prompt">
+└─$ ssh-keygen -t ed25519 -C "lara@example.com"
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/lara/.ssh/id_ed25519): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/lara/.ssh/id_ed25519
+Your public key has been saved in /home/lara/.ssh/id_ed25519.pub
+The key's randomart image is:
++--[ED25519 256]--+
+|      .o.        |
+|     . o         |
+|    . + . .      |
+|   . + = + o     |
+|  . o + S .      |
+|   . = . .       |
+|    o * .        |
+|   . + E         |
+|    . .          |
++----[SHA256]-----+
+</span>
+        </code>
+            </div>
+        </div>
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">El Despertar y la
+                    Renovación</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">┌──(lara㉿kali)-[~]</span><span class="prompt">
+└─$ ssh-copy-id amin@192.168.8.101
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/lara/.ssh/id_ed25519.pub"
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the key(s)
+amin@192.168.8.101's password:
+
+Number of key(s) added: 1
+
+Now try logging in to the machine, with:   "ssh 'amin@192.168.8.101'"
+and check to make sure that only the key(s) you wanted were added.
+</span>
+        </code>
+            </div>
+        </div>
+
+        <p>Con la clave pública de Lara instalada en el servidor de Amin, solo quedaba confirmar su funcionamiento real.
+        </p>
+
+        <p>Desde su terminal, ejecutó la conexión. Esta vez, no hubo petición de contraseña. Solo un instante de espera,
+            y luego, la aparición limpia del prompt remoto: estaban dentro.</p>
+
+        <p>— Funcionó —dijo Amin, observando el registro del sistema en tiempo real—. Sin fricción. Solo autenticación
+            pura.</p>
+
+        <p>Lara asintió. La clave privada había sido aceptada, la identidad verificada, y el canal SSH se estableció sin
+            intervención humana. Exactamente como debía ser.</p>
+        <br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">El Despertar y la
+                    Renovación</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">┌──(lara㉿kali)-[~]</span><span class="prompt">
+└─$ ssh amin@192.168.8.101
+Linux debian-server 6.1.0-18-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.76-1 (2024-02-19) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Jun 10 00:15:20 2025 from 192.168.8.148</span>
+<span class="output">amin@1-bytepath:~$</span> 
+
+        </code>
+            </div>
+        </div>
+        <p>La conexión sin contraseña era ahora una realidad, estable y silenciosa. Pero Lara sabía que dejar abierta la
+            antigua vía de acceso era una amenaza latente. Las contraseñas podían ser adivinadas, forzadas o
+            interceptadas; las claves, en cambio, no ofrecían ese margen.</p>
+
+        <p>Con el acceso SSH ya garantizado mediante autenticación criptográfica, el siguiente paso era definitivo:
+            cerrar la puerta obsoleta. Desde la misma sesión remota, abrió el archivo <code>sshd_config</code>, núcleo
+            de las directivas del servicio SSH en el servidor de Amin.</p>
+
+        <p>Un solo parámetro marcaría la diferencia. Bastaba con desactivar la opción
+            <code>PasswordAuthentication</code> para bloquear por completo cualquier intento futuro de conexión mediante
+            contraseña. Un ajuste mínimo, un cambio de estado, y sin embargo, el servidor cruzaría un umbral: de
+            accesible a blindado.
+        </p>
+        <br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">El Despertar y la
+                    Renovación</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:~$</span><span class="prompt">
+sudo nano /etc/ssh/sshd_config</span>
+
+ 
+
+        </code>
+            </div>
+        </div>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">El Despertar y la
+                    Renovación</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:~$</span><span class="prompt">
+# CONTENIDO DEL ARCHIVO /etc/ssh/sshd_config (solo las partes relevantes)
+
+# [...] otras configuraciones [...]
+
+# Authentication:
+#LoginGraceTime 2m
+#PermitRootLogin prohibit-password
+#StrictModes yes
+#MaxAuthTries 6
+#MaxSessions 10
+
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication no  # <-- CAMBIAR DE 'yes' A 'no', O AÑADIR ESTA LÍNEA
+
+#PermitEmptyPasswords no
+
+# [...] más configuraciones [...]
+</span>
+
+<span class="output">amin@1-bytepath:~$ </span><span class="prompt">sudo systemctl restart sshd</span>
+
+        </code>
+            </div>
+        </div>
+        <p>Lara, metódica como siempre, mantuvo la vista fija en la terminal. «Bien», murmuró, revisando línea por
+            línea, «si el demonio SSH ha cargado correctamente la nueva configuración, entonces ya no habrá retorno: la
+            autenticación por clave será el único acceso posible».</p>
+
+        <p>Amin, al escucharla, comprendió el peso del cambio. No era solo una medida técnica; era una declaración de
+            principios. El servidor dejaba atrás la era de las contraseñas, cerrando una puerta demasiado fácil de
+            forzar. Ahora, solo las claves —únicas, inquebrantables— serían aceptadas.</p>
+
+
+
+
+        <!--Paquetes básicos-->
+        <h2>La Huida Silenciosa: Dejando el Servidor a su Suerte Controlada</h2>
+
+        <p>La autenticación por clave funcionaba a la perfección, un logro técnico fundamental, pero la seguridad física
+            del servidor seguía siendo una vulnerabilidad latente. La única defensa real era el olvido: mantenerlo
+            operativo y desaparecer sin dejar rastro.</p>
+
+        <p>«Tenemos que dejar esto listo para funcionar de forma autónoma y luego desaparecer,» afirmó Lara, los ojos
+            fijos en la pantalla, aunque su mente ya recorría la carretera de regreso. «Si regresamos, no será a este
+            sitio. Desde ahora, monitorizaremos todo a distancia.»</p>
+
+        <p>La misión estaba clara: instalar las herramientas básicas para la gestión remota eficaz y luego fundirse con
+            la sombra del olvido.</p>
+        <br>
+
+
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">El Despertar y la
+                    Renovación</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:~$</span><span class="prompt">
+sudo apt update
+[sudo] password for amin: 
+Hit:1 http://deb.debian.org/debian bookworm InRelease
+Hit:2 http://deb.debian.org/debian bookworm-updates InRelease
+Hit:3 http://deb.debian.org/debian-security bookworm-security InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+</span>
+
+<span class="output">amin@1-bytepath:~$ </span><span class="prompt">sudo apt install net-tools curl wget htop bash-completion -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libsqlite3-0 libxml2 libxslt1.1 libgpm2 libtinfo6
+Suggested packages:
+  moreutils
+The following NEW packages will be installed:
+  bash-completion curl htop libgpm2 libsqlite3-0 libtinfo6 libxml2 libxslt1.1 net-tools wget
+0 upgraded, 10 newly installed, 0 to remove and 0 not upgraded.
+Need to get 3,576 kB of archives.
+After this operation, 13.5 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libsqlite3-0 amd64 3.40.1-1 [807 kB]
+# [...] (muchas líneas de descarga y extracción) [...]
+Setting up bash-completion (2.11-6) ...
+Setting up curl (7.88.1-10) ...
+Setting up htop (3.2.2-1) ...
+Setting up libgpm2 (1.20.7-10) ...
+Setting up libxml2:amd64 (2.9.14+dfsg-1.3) ...
+Setting up libxslt1.1:amd64 (1.1.37-3) ...
+Setting up net-tools (2.10-1) ...
+Setting up wget (1.21.4-1) ...
+Processing triggers for man-db (2.11.2-1) ...
+Processing triggers for libc-bin (2.36-9+deb12u3) ...
+</span>
+
+        </code>
+            </div>
+        </div>
+
+        <p>El objetivo final: <strong>Arcadia</strong>. Un nombre que resonaba en las comunicaciones como un susurro de
+            esperanza entre la desolación. Una ciudad donde, según los viejos archivos, los servidores no eran solo
+            máquinas, sino fortalezas digitales custodiadas por una vigilancia incansable.</p>
+        <p>Lara miró a Amin y dijo en voz baja, casi para sí misma: "Si logramos llegar a Arcadia, quizás encontremos el
+            refugio que este mundo necesita."</p>
+        <p>Amin asintió, con la mirada fija en el horizonte digital. "Pero aún queda camino por recorrer. Esto es solo
+            el comienzo."</p>
+        <p>Mientras se desconectaban, el servidor quedó en marcha, un centinela solitario en la vasta red, esperando el
+            próximo paso en esta odisea tecnológica.</p>
+        <!-- FLECHAS PREV/NEXT -->
+        <div class="article-navigation">
+            <a href="intro.html" class="nav-arrow-prev" id="prev-chapter-link" <h3>PREV..</h3></a>
+
+            <a href="seguridad_basica.html" class="nav-arrow-next" id="next-chapter-link" <h3>NEXT..</h3></a>
+        </div>
+
+
+    </main>
+
+
+    <footer>
+        <div class="social-links">
+                <a href="" target="_blank" aria-label="Mi perfil de LinkedIn">LinkedIn</a>
+                <a href="" target="_blank" aria-label="Mi perfil de GitHub">GitHub</a>
+        </div>
+        <p>
+            &copy; 2025 Ruben Riau Vicente. The BytePath Chronicles. Contenido bajo 
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">Licencia CC 4.0</a>.
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank"
+                rel="license noopener noreferrer">
+                <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png"
+                    alt="Licencia Creative Commons Atribución-Compartir Igual 4.0 Internacional" class="cc-button">
+            </a>
+        </p>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const article = document.querySelector('.contenido'); // Selecciona tu artículo
+            if (article) {
+                // Espera X milisegundos (ej. 1500 = 1.5 segundos) antes de añadir la clase
+                setTimeout(() => {
+                    article.classList.add('contenido-visible'); // ¡Añade la nueva clase aquí!
+                }, 500); // Ajusta este tiempo de retardo inicial como prefieras
+            }
+        });
+    </script>
+
+</body>
+
+</html>

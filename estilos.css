@@ -1,0 +1,1072 @@
+/* --- 0. RESET BÁSICO Y PROPIEDADES GENERALES --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+    /* asegura que 1em = 16px por defecto */
+}
+
+body {
+    font-family: Verdana, Geneva, sans-serif;
+
+    line-height: 1.5;
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    /* Para el sticky footer */
+    flex-direction: column;
+    /* Apilar el contenido en columna */
+    margin: 0;
+    /* Asegura que no haya márgenes por defecto */
+}
+h1 {
+   color: #f0e6d2;
+   font-family: 'Orbitron', sans-serif;
+   font-size: 2rem; 
+}
+h2 {
+    color: #f0e6d2;
+   font-family: 'Orbitron', sans-serif;
+   font-size: 1.5rem; 
+}
+h3 {
+    color: #f0e6d2;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.25rem;
+    
+}
+
+p {
+    color: #d9cbb4;
+    line-height: 1.6;
+    font-family: Verdana, sans-serif;
+    font-size: 1rem;
+
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+a {
+    color: #ffd580;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-family: Verdana, sans-serif;
+    font-size: 1rem;
+}
+
+a:hover {
+    color: #fff3b0;
+}
+
+ul,
+ol {
+    color: #ffd580;
+    line-height: 1.6;
+    font-family: Verdana, sans-serif;
+    
+}
+
+#main-background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+
+
+
+/* --- INICIO: SECCIÓN DE ESTILOS DE LA TERMINAL --- */
+
+/* Estilos para la ventana completa de la terminal (el "marco") */
+.code-block.terminal-simulation {
+    border: 1px solid #555;
+    border-radius: 4px;
+    overflow: hidden;
+    /* Muy importante para el scroll del código */
+    margin-bottom: 1.5625rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+    background-color: #2a2a2a;
+    text-align: left;
+    /* Aseguramos que la alineación de texto por defecto dentro de este bloque sea a la izquierda */
+    direction: ltr;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Estilos para la barra de título de la terminal */
+.terminal-header {
+    background-color: #333;
+    padding: 0.375rem 0.9375rem;
+    display: flex;
+    /* Contenedor flexbox */
+    align-items: center;
+    /* Alinea verticalmente los items */
+    flex-direction: row;
+    /* Asegura que los elementos se dispongan en fila (izq a der) */
+    border-bottom: 1px solid #444;
+    position: relative;
+    color: #bbb;
+    font-size: 0.875rem;
+    font-family: 'Segoe UI', 'Ubuntu', 'Cantarell', sans-serif;
+    text-align: left;
+    /* Alineación del texto dentro del header (para el título) */
+}
+
+/* Estilos para los botones de la terminal (tipo Linux) */
+.terminal-button {
+    width: 1.125rem;
+    /* Un poco más de ancho para que el icono quepa bien */
+    height: 1.135rem;
+    /* Un poco más de alto */
+    margin-right: 0.5rem;
+    /* Espacio entre los botones */
+    display: flex;
+    /* Usamos flexbox para centrar el icono */
+    justify-content: center;
+    /* Centra horizontalmente el icono */
+    align-items: center;
+    /* Centra verticalmente el icono */
+    font-size: 0.9em;
+    /* Tamaño del icono */
+    line-height: 1;
+    /* Ajusta la altura de línea */
+    font-weight: bold;
+    /* Hace el icono más grueso si es un carácter */
+    cursor: pointer;
+    /* Indica que es clickeable */
+    color: #bbb;
+    /* Color por defecto de los iconos */
+    background-color: transparent;
+    /* Quitamos el color de fondo */
+    border: 1px solid #555;
+    /* Le damos un borde sutil */
+    border-radius: 3px;
+    /* Cuadrados con bordes ligeramente redondeados */
+    opacity: 0.8;
+    transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    order: 2;
+    /* Sigue yendo al final con flexbox */
+}
+
+.terminal-button:hover {
+    opacity: 1;
+    background-color: rgba(90, 90, 90, 0.3);
+    /* Un ligero fondo al pasar el ratón */
+    color: #eee;
+}
+
+/* Estilos específicos de cada botón (colores al pasar el ratón) */
+.terminal-button.close {
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+/* Rojo para la X */
+.terminal-button.close:hover {
+    background-color: rgba(231, 76, 60, 0.2);
+}
+
+.terminal-button.minimize {
+    color: #f1c40f;
+    border-color: #f1c40f;
+}
+
+/* Amarillo para minimizar */
+.terminal-button.minimize:hover {
+    background-color: rgba(241, 196, 15, 0.2);
+}
+
+.terminal-button.maximize {
+    color: #2ecc71;
+    border-color: #2ecc71;
+}
+
+/* Verde para maximizar */
+.terminal-button.maximize:hover {
+    background-color: rgba(46, 204, 113, 0.2);
+}
+
+
+/* Estilos para el título de la ventana de la terminal */
+.terminal-title {
+    color: #bbb;
+    font-size: 0.9em;
+    flex-grow: 1;
+    /* Permite que el título ocupe el espacio disponible */
+    text-align: left;
+    /* Asegura que el texto del título se alinee a la izquierda */
+    margin: 0;
+    /* Elimina cualquier margen que pudiera moverlo */
+    order: 1;
+    /* Asegura que el título sea el primer elemento flex */
+    margin-left: 0.625rem;
+    /* Pequeño espacio para separar del grupo de botones */
+}
+
+/* --- CAMBIOS PRINCIPALES EN ESTE BLOQUE PARA EL SCROLL Y ALINEACIÓN --- */
+
+/* Estilos para el nuevo div que contiene el código (reemplazando a <pre>) */
+.code-block.terminal-simulation .terminal-code-content {
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    /* ¡CLAVE! Muestra la barra de scroll horizontal si el contenido desborda su ancho */
+    overflow-y: hidden;
+    text-align: left;
+    /* Alineación del texto por si acaso */
+    direction: ltr;
+    /* Dirección de texto por si acaso */
+    display: block;
+    /* Comportamiento de bloque estándar */
+    box-sizing: border-box;
+    background-color: #1a1a1a;
+    /* Fondo del área del código */
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    min-width: 0;
+    /* Aseguramos que no se genere un min-width inesperado */
+}
+
+
+/* Estilos del <code> en sí (el contenido del código) */
+.code-block.terminal-simulation .terminal-code-content code {
+    display: block;
+    /* MUY IMPORTANTE: Asegura que el <code> se comporte como un bloque y el text-align funcione */
+
+    /* GESTIÓN DE ANCHO Y SCROLL */
+    width: max-content;
+    /* ¡CLAVE! Hace que el <code> sea tan ancho como su contenido más largo */
+    min-width: 100%;
+    /* ¡CLAVE! Asegura que el <code> ocupe al menos el 100% del padre */
+    /* Si 'max-content' es más pequeño que el 100% del padre, 'min-width: 100%' lo expande. */
+    /* Si 'max-content' es más grande que el 100% del padre, 'max-content' tiene prioridad */
+    /* y el elemento desbordará, activando el scroll. */
+
+
+    color: #e0e0e0;
+    font-family: 'Ubuntu Mono', 'Liberation Mono', 'Droid Sans Mono', 'Monospace', monospace;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    padding: 1.2em 1.5em;
+    /* Padding para dar espacio al texto */
+
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 0;
+
+    border-left: none;
+    text-align: left;
+    /* Alinea el texto a la izquierda */
+
+    white-space: pre;
+    /* Esto hará que las líneas largas no se envuelvan y mantengan sus espacios */
+
+    word-break: normal;
+    /* No rompe palabras arbitrariamente */
+    word-wrap: normal;
+    /* No envuelve palabras arbitrariamente */
+
+    direction: ltr;
+    /* Asegura la dirección de izquierda a derecha */
+    float: none;
+    /* Desactiva cualquier flotado */
+    margin: 0;
+    /* Reinicia todos los márgenes */
+
+    box-sizing: border-box;
+    /* Incluye padding y border en el ancho/alto */
+}
+
+/* Estilos para el texto de salida y errores (si los envuelves en <span>) */
+.code-block.terminal-simulation .terminal-code-content code .output {
+    color: #00ff00;
+}
+
+.code-block.terminal-simulation .terminal-code-content code .error {
+    color: #ff0000;
+}
+
+/* Opcional: Estilo para el prompt */
+.code-block.terminal-simulation .terminal-code-content code .prompt {
+    color: #e0e0e0;
+    font-weight: bold;
+}
+
+
+/* --- FIN: SECCIÓN DE ESTILOS DE LA TERMINAL --- */
+
+
+/* AJUSTES PARA EL HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem;
+    height: 3.75rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(60, 45, 30, 0.8);
+    padding: 0 1.25rem;
+    z-index: 100;
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(0.1875rem);
+    
+}
+
+.header-left-group {
+    display: flex;
+    align-items: center;
+    gap: 0.9375rem;
+    
+}
+
+.site-logo {
+    max-width: 1.875rem;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 0.625rem;
+    
+}
+
+.site-title {
+    margin: 0;
+    font-size: 2rem;
+    flex-grow: 0;
+    color: #f0e6d2;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+}
+
+
+
+
+/* --- Navegación principal (main-nav) --- */
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 0.9375rem;
+    
+}
+
+.main-nav li {
+    position: relative;
+}
+
+.main-nav a {
+    display: block;
+    padding: 0.9375rem 0.625rem;
+    white-space: nowrap;
+    color: #d9cbb4;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.main-nav a:hover {
+    background-color: rgba(60, 45, 30, 0.8);
+    color: #ffd580;
+}
+
+.main-nav>ul>li {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.main-nav>ul>li>a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+/* --- 2. SECCIÓN HÉROE (PORTADA PRINCIPAL) --- */
+.hero-section {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 3.75rem; /* En lugar de top: 60px */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 3.75rem); /* Ajusta el alto para que no tape el header */
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 8rem;
+    max-width: 93.75rem;
+    margin: 0 auto;
+}
+
+.hero-logo {
+    max-width: 12.5rem;
+    height: auto;
+    margin-bottom: 1.25rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-section blockquote {
+    
+    font-style: italic;
+    margin-bottom: 1.875rem;
+    line-height: 1.3;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero-section blockquote p {
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #ffd580;
+    font-weight: bold;
+    font-size: 3em;
+}
+
+/* --- 3. SECCIÓN DE ÚLTIMOS DESCUBRIMIENTOS (MINIATURAS) --- */
+/* Contenedor principal de la sección. Ahora solo organiza verticalmente el h2, el articles-container y el view-all-link */
+.latest-discoveries {
+    padding: 2.5rem 1.25rem;
+    background-color: #1a1a1a;
+    color: #f8f8f2;
+    text-align: center;
+    /* Centra el h2 y el enlace "Ver todos" */
+
+    /* === ORGANIZACIÓN VERTICAL === */
+    display: flex;
+    flex-direction: column;
+    /* Apila los elementos: h2, articles-container, view-all-link */
+    align-items: center;
+    /* Centra el contenido horizontalmente en la columna */
+}
+
+.latest-discoveries h2 {
+    width: 100%;
+    margin-bottom: 2.5rem;
+    font-size: 2.5em;
+    color: #f1fa8c;
+}
+
+/* === CONTENEDOR DE LAS MINIATURAS (.articles-container) === */
+/* ¡Este es el que organiza la cuadrícula de las miniaturas! */
+.articles-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.875rem;
+    /* Espacio entre cada miniatura */
+    max-width: 71.875rem;
+    /* Ancho máximo de la cuadrícula de miniaturas (ajusta según tu monitor y preferencia) */
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 3.125;
+}
+
+/* --- Estilos para cada miniatura individual (.article-preview) --- */
+.article-preview {
+    background-color: #222;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    /* Importante para que los bordes redondeados se apliquen bien */
+
+    /* Propiedades Flexbox para el layout horizontal en el articles-container padre */
+    flex: 1 1 calc(25% - 22.5px);
+    /* Para 4 columnas. Usa calc(33.33% - 20px) para 3 columnas */
+    min-width: 15.625rem;
+    /* Ancho mínimo antes de que las miniaturas se apilen */
+
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+
+    /* === CAMBIOS CLAVE AQUÍ para que la miniatura se organice internamente === */
+    display: flex;
+    flex-direction: column;
+    /* Apila el enlace de la imagen y el div de info */
+    /* Ya NO se necesitan: position: relative; padding-bottom; height: 0; aquí */
+}
+
+.article-preview:hover {
+    transform: translateY(-5px);
+}
+
+/* --- Estilos para el ENLACE que contiene la IMAGEN (.article-image-link) --- */
+.article-image-link {
+    display: block;
+    /* Asegura que el enlace ocupe todo el ancho disponible */
+    position: relative;
+    /* Clave para que padding-bottom funcione como height */
+    padding-bottom: calc(100% * 9 / 16);
+    /* Calcula la altura basada en el ancho para 16:9 */
+    height: 0;
+    /* Resetea la altura */
+    overflow: hidden;
+    /* Oculta cualquier parte de la imagen que se salga */
+}
+
+/* --- Estilos para la IMAGEN dentro de la miniatura (.article-thumbnail) --- */
+.article-preview .article-thumbnail {
+    position: absolute;
+    /* Para que ocupe el espacio definido por el padding-bottom del padre (.article-image-link) */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+/* --- ESTILOS PARA EL CONTENEDOR DE INFORMACIÓN/TÍTULO DEBAJO DE LA IMAGEN (.article-info) --- */
+.article-info {
+    padding: 0.9375rem 0.625rem;
+    /* Espacio interno para el texto */
+    background-color: #222;
+    /* Fondo del área del título */
+    color: #f8f8f2;
+    /* Color del texto */
+    text-align: center;
+    flex-grow: 1;
+    /* Permite que este div ocupe cualquier espacio restante si es necesario */
+    display: flex;
+    /* Utiliza flexbox para centrar el contenido (título) si es corto */
+    align-items: center;
+    /* Centra verticalmente */
+    justify-content: center;
+    /* Centra horizontalmente */
+}
+
+.article-info h3 {
+    margin: 0;
+    /* Elimina márgenes predeterminados del h3 */
+    font-size: 1.25rem;
+    /* Ajusta el tamaño de la fuente */
+    line-height: 1.3em;
+    /* Espaciado entre líneas */
+    /* Opcional: Si tus títulos son muy largos, descomenta y ajusta: */
+    /* display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limita a 2 líneas */
+    /* -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; */
+}
+
+/* --- Estilos para el enlace "Ver todos" --- */
+.view-all-link {
+    width: 100%;
+    text-align: center;
+    margin-top: 5rem;   /* separa del bloque anterior */
+    margin-bottom: 3rem; /* separa del footer */
+}
+
+.view-all-link a {
+    font-size: 0.875rem;
+    color: #f1fa8c;
+    text-decoration: none;
+    padding: 0.625rem 1.25rem;
+    border: 1px solid #f1fa8c;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-right: 1.25rem;
+}
+
+.view-all-link a:hover {
+    background-color: #f1fa8c;
+    color: #282a36;
+}
+
+/* Flecha del enlace "Ver todos" */
+.view-all-link a::after {
+    content: '\2192';
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.875rem;
+    transition: transform 0.3s ease;
+}
+
+.view-all-link a:hover::after {
+    transform: translateY(-50%) translateX(5px);
+}
+
+/* --- 5. PIE DE PÁGINA (FOOTER) --- */
+footer {
+    margin-top: auto;
+    /* Empuja el footer hacia abajo */
+    width: 100%;
+    background-color: rgba(30, 30, 30, 0.9);
+    color: #d9cbb4;
+    padding: 0.625rem 1.25rem;
+    /*min-height: unset;*/
+    max-height: unset;
+    text-align: center;
+    z-index: 100;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Para que redes queden a la izquierda y copyright a la derecha */
+    gap: 1rem; /* Un espacio opcional entre bloques */
+  
+}
+.social-links a {
+    color: #ffd580;
+    text-decoration: none;
+    margin-left: 0.9375rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #fff3b0;
+}
+
+.cc-button {
+    max-width: 3.5em;
+    height: auto;
+    display: inline-block;
+    margin: 0 0 0 5px;
+    vertical-align: middle;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.cc-button:hover {
+    opacity: 1;
+}
+
+footer a {
+    color: orange;
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+footer p {
+    font-size: 0.875rem;
+}
+
+footer a:hover {
+    color: #ff8c00;
+}
+
+
+/* --- 6. ESTILOS DE CONTENIDO DE ARTÍCULOS (si aplica) --- */
+.contenido {
+    margin-top: 0px;
+    opacity: 0.0;
+    transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+    padding: 1.875rem;
+    max-width: 50rem;
+    margin: 7.5rem auto;
+    background-color: rgba(30, 30, 30, 1.0);
+    border-radius: 0.75rem;
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contenido.contenido-visible {
+    opacity: 0.9;
+    box-shadow: 0 0.9375rem 1.875rem rgba(0, 0, 0, 0.6);
+}
+
+.contenido img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.75rem rgba(0, 0, 0, 0.5);
+}
+
+pre code {
+    font-family: "Fira Code", monospace;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #f0f0f0;
+    padding: 1em;
+    border-radius: 8px;
+    display: block;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+
+
+
+/* --- ESTILOS PARA LA PÁGINA DE BITÁCORA / ARCHIVO DE ARTÍCULOS --- */
+
+/* Contenedor principal de la cuadrícula de artículos */
+.articles-grid {
+    display: flex;
+    /* Habilita Flexbox */
+    flex-wrap: wrap;
+    /* Permite que los elementos se envuelvan a la siguiente línea */
+    justify-content: center;
+    /* Centra los elementos horizontalmente */
+    gap: 1.875rem;
+    /* Espacio entre las miniaturas (ajusta según necesites) */
+    padding: 1.25rem;
+    /* Un poco de padding alrededor de la cuadrícula */
+    max-width: 75rem;
+    /* Limita el ancho máximo del contenedor de la cuadrícula */
+    margin: 0 auto;
+    /* Centra el contenedor de la cuadrícula en la página */
+}
+
+/* Estilos individuales de cada miniatura */
+.article-preview {
+    flex: 0 0 calc(33.333% - 40px);
+    /* Para 3 columnas en pantallas grandes (33.333% - gap) */
+    max-width: 12.5rem;
+    /* Limita el ancho máximo de cada miniatura */
+    background-color: #2a2a2a;
+    /* Fondo para las miniaturas */
+    border-radius: 8px;
+    overflow: hidden;
+    /* Para que la imagen no se salga de los bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    padding: 0.9375rem;
+    /* Padding interno de la miniatura */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.article-preview:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.0375rem 0.75rem rgba(0, 0, 0, 0.6);
+}
+
+.article-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    /* Un poco de redondeo para las imágenes */
+    margin-bottom: 0.625rem;
+}
+
+.article-preview h3 {
+    
+    margin-bottom: 0.625rem;
+    color: #f1fa8c;
+    /* Color del título de la miniatura */
+}
+
+.article-preview p {
+    
+    color: #cccccc;
+    margin-bottom: 15px;
+}
+
+.article-preview .read-more {
+    display: inline-block;
+    background-color: #4CAF50;
+    /* Un color de botón para "Leer más" */
+    color: white;
+    padding: 0.5rem 0.9375rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* --- ESTILOS PARA EL TÍTULO PRINCIPAL DE LA PÁGINA DE BITÁCORA --- */
+
+section.blog-archive h1 {
+    
+    
+    color: #FF8C00;
+    /* Un tono naranja brillante, ajusta a tu color deseado */
+    text-align: center;
+    /* Centrar el texto */
+    margin-top: 6.25rem;
+    /* Espacio superior para separarlo del header */
+    margin-bottom: 1.875rem;
+    /* Espacio inferior para separarlo de la cuadrícula */
+    padding: 0 1.25rem;
+    /* Un poco de padding horizontal para pantallas pequeñas */
+}
+
+
+.article-preview .read-more:hover {
+    background-color: #45a049;
+}
+
+/* FLECHAS PREV/NEXT */
+
+
+
+/* --- ESTILOS PARA EL CONTENEDOR DE LAS FLECHAS --- */
+
+.article-navigation {
+    display: flex;
+    /* Usa Flexbox para alinear las flechas */
+    justify-content: space-between;
+    /* Empuja una flecha a cada extremo */
+    align-items: center;
+    /* Centra verticalmente si los elementos tuvieran diferentes alturas */
+    margin-top: 2.5rem;
+    /* Margen superior para separarlo del contenido del artículo */
+    padding-top: 1.25rem;
+    /* Un poco de padding arriba si lo necesitas */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    /* Línea divisoria sutil (opcional) */
+}
+
+/* --- ESTILOS DE LAS FLECHAS --- */
+.nav-arrow-prev,
+.nav-arrow-next {
+    /* Eliminamos 'position: fixed', 'top', 'transform: translateY', 'left', 'right', 'z-index' */
+    cursor: pointer;
+    text-decoration: none;
+    /* Quita el subrayado del enlace */
+
+    /* Tus estilos de fondo y forma que ya tenías */
+    background-color: rgba(60, 45, 30, 0.6);
+    /* Color de fondo que me pasaste */
+    padding: 0.625rem 0.9375rem;
+    /* Espaciado interno */
+    border-radius: 5px;
+    /* Bordes ligeramente redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* Sombra sutil */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    /* Transiciones suaves */
+
+    /* Alineación del texto dentro de las flechas (si usas h3) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para el texto (h3) dentro de las flechas */
+.nav-arrow-prev h3,
+.nav-arrow-next h3 {
+    margin: 0;
+    /* Elimina el margen por defecto del h3 */
+    padding: 0;
+    /* Elimina cualquier padding por defecto */
+    color: white;
+    /* Color del texto, puedes ajustarlo si quieres que el texto tenga otro color de tu paleta */
+    
+    
+    font-weight: bold;
+    /* Negrita */
+    line-height: 1;
+    /* Ajusta el interlineado */
+}
+
+/* Efecto al pasar el ratón por encima */
+.nav-arrow-prev:hover,
+.nav-arrow-next:hover {
+    background-color: rgba(60, 45, 30, 0.9);
+    /* Más opaco al hacer hover, color que me pasaste */
+    transform: scale(1.05);
+    /* Ligeramente más grande (ya no necesitamos translateY(-50%) aquí) */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Sombra más pronunciada */
+}
+
+/* Oculta las flechas que no tienen atributo 'href' */
+.nav-arrow-prev:not([href]),
+.nav-arrow-next:not([href]) {
+    visibility: hidden;
+    /* Las hace invisibles */
+    pointer-events: none;
+    /* Las hace no clickeables */
+    opacity: 0;
+    /* Las desvanece suavemente */
+    /* Asegúrate de que tu transición ya maneje la opacidad, si no, añádela aquí */
+    transition: visibility 0s linear 0.3s, opacity 0.3s ease;
+    /* Retraso para que el fade out sea visible */
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  html {
+    font-size: 90%;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+    height: auto;
+  }
+
+  .header-left-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .logo-link {
+    flex-shrink: 0;
+  }
+
+  .site-title {
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+  }
+
+
+
+  .hero-overlay {
+    top: 3.75rem;
+    bottom: 0;
+  }
+
+  .main-nav {
+    flex-shrink: 0;
+  }
+
+  .main-nav ul {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.7rem;
+    padding: 0;
+    margin: 0;
+    justify-content: flex-end;
+  }
+
+  .main-nav li {
+    flex-shrink: 0;
+  }
+
+  .main-nav a {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  .contenido {
+    width: 90%;
+    max-width: 40rem;
+    
+    margin: 7.5rem auto;
+  }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+  html {
+    font-size: 85%;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .header-left-group {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .logo-link {
+    flex-shrink: 0;
+  }
+
+  .site-title {
+
+    text-align: left;
+  }
+
+  .main-nav {
+    width: 100%;
+  }
+
+  .main-nav ul {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .main-nav a {
+    
+    padding: 0.4rem 0.6rem;
+  }
+  section.blog-archive h1 {
+    margin-top: 8rem;
+  }
+
+  .hero-overlay {
+    top: 6rem;
+    bottom: 0;
+  }
+
+  .contenido {
+    width: 92%;
+    max-width: 38rem;
+    margin-top: 10rem;
+  }
+}
+@media (max-width: 375px) {
+  html {
+    font-size: 80%;
+  }
+
+  .hero-overlay {
+    top: 6rem; /* ajusta este valor si cambió el header */
+    height: calc(100% - 6rem);
+  }
+
+  .main-nav a {
+    
+    padding: 0.4rem 0.5rem;
+  }
+
+  .contenido {
+    width: 85%;
+    margin-top: 8rem;
+    margin-bottom: 3rem;
+  }
+
+  .view-all-link a {
+    
+    padding: 0.5rem 1rem;
+  }
+
+  .cc-button {
+    max-width: 3rem;
+  }
+}
+

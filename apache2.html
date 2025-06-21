@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apache2: Instalación y configuración</title>
+    <meta name="description" content="Instalación y configuración de Apache2">
+
+    <meta name="keywords"
+        content="tecnologia, programación, linux, cloud, seguridad, desarrollo web, DevOps, ciberseguridad, The BytePath Chronicles, tutorial, guia">
+
+    <link rel="canonical" href="https://www.thebytepathchronicles.com/ruta-completa-al-articulo.html">
+
+    <link rel="icon" href="/imagenes/varios/escudo_azul.svg" type="image/x-icon">
+
+
+    <meta property="og:title" content="Apache2: Instalación y configuración">
+    <meta property="og:description" content="Instalación y configuración de Apache2.">
+    <meta property="og:image" content="https://www.thebytepathchronicles.com/assets/images/thumbnail-articulo.jpg">
+    <meta property="og:url" content="https://www.thebytepathchronicles.com/ruta-completa-al-articulo.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The BytePath Chronicles">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@TuUsuarioTwitter">
+    <meta name="twitter:creator" content="@TuUsuarioTwitter">
+    <meta name="twitter:title" content="Título del Artículo en Twitter">
+    <meta name="twitter:description" content="Apache2. Instalación y configuración.">
+    <meta name="twitter:image"
+        content="https://www.thebytepathchronicles.com/assets/images/thumbnail-articulo-twitter.jpg">
+    <link rel="stylesheet" href="/estilos.css" />
+</head>
+
+<body>
+    <img id="main-background-image" src="/imagenes/portadas/A1C3N00-background-1200px.webp" srcset="/imagenes/portadas/A1C3N00-background-400px.webp 400w,
+             /imagenes/portadas/A1C3N00-background-800px.webp 800w,
+             /imagenes/portadas/A1C23N00-background-1200px.webp 1200w,
+             /imagenes/portadas/A1C3N00-background-1800px.webp 1800w,
+             /imagenes/portadas/A1C3N00-background-2400px.webp 2400w" sizes="(max-width: 600px) 100vw,
+            (max-width: 1200px) 70vw,
+            100vw" alt="Imagen de portada del articulo sobre Apache2">
+    <header>
+        <div class="header-left-group">
+            <a href="/index.html" class="logo-link">
+                <img src="/imagenes/varios/escudo_azul.svg" alt="Logo de The BytePath Chronicles" class="site-logo">
+            </a>
+            <div class="site-title">The BytePath Chronicles</div>
+            
+        </div>
+        <nav class="main-nav">
+            <ul>
+
+                <li><a href="/bitacora.html">Mis Apuntes</a></li>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="proyecto.html">Proyecto</a></li>
+            </ul>
+        </nav>
+
+    </header>
+    <main class="contenido">
+        <h1>Servidor Apache2</h1>
+
+        <p>Lara y Amin retomaron el viaje pero sus pensamientos no se apartaban de servidor</p>
+        <p>Necesitaban que su existencia fuera conocida, que su conocimiento sirviera de faro.</p>
+        <p>Amin, con la mirada fija en el polvo que levantaban, comprendió. "Una página web. Un lugar donde otros como
+            nosotros puedan encontrarnos. Un repositorio de la información que aún existe, una guía para los que buscan
+            reconstruir."</p>
+        <p>Exacto," respondió Lara, y para eso, necesitaremos a Apache2, el guardián de las páginas web del viejo
+            mundo."</p>
+        <p>Su próxima parada sería para configurar Apache2, no solo para que el servidor hablara, sino para que lo
+            hiciera de forma segura y robusta.</p>
+
+        <h2>Instalación de Apache2</h2>
+
+        <p>Llegaron a un campamento improvisado, un lugar con cierta protección contra los elementos y, crucialmente,
+            con una fuente de energía estable. Era el momento de dar voz al servidor</p>
+        <p>No bastaba con instalarlo; necesitaban que gestionara la web de forma independiente y segura.</p><br>
+
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">┌──(lara㉿kali)-[~]</span>
+<span class="prompt">└─$ ssh amin@192.168.8.101
+</span>
+
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo apt update
+Hit:1 http://deb.debian.org/debian bookworm InRelease
+Hit:2 http://deb.debian.org/debian bookworm-updates InRelease
+Hit:3 http://deb.debian.org/debian-security bookworm-security InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo apt install apache2 -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  apache2-bin apache2-data apache2-utils libapr1 libaprutil1 libaprutil1-dbd-sqlite3
+  libaprutil1-ldap liblua5.3-0 libxml2 mailcap media-types
+Suggested packages:
+  apache2-doc apache2-suexec-pristine | apache2-suexec-custom
+The following NEW packages will be installed:
+  apache2 apache2-bin apache2-data apache2-utils libapr1 libaprutil1
+  libaprutil1-dbd-sqlite3 libaprutil1-ldap liblua5.3-0 libxml2 mailcap
+  media-types
+0 upgraded, 12 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1,985 kB of archives.
+.........
+Created symlink /etc/systemd/system/multi-user.target.wants/apache2.service → /lib/systemd/system/apache2.service.
+Processing triggers for man-db (2.11.2-1) ...
+Processing triggers for libc-bin (2.36-9+deb12u3) ...</span>
+        </code>
+            </div>
+        </div>
+
+        <h2>Creación de un Host Virtual</h2>
+
+        <p>Con Apache2 instalado, el siguiente paso era configurar un Host Virtual. Aunque Apache2 viene con una
+            configuración por defecto, Lara sabía que para su propósito de crear una guía digital y un punto de
+            contacto, necesitarían un espacio dedicado. Un Host Virtual les permitiría alojar su propio sitio web con su
+            propia configuración, aislado de futuras páginas que pudieran añadir. Sería el 'hogar' digital de su
+            manifiesto.</p>
+        <p>Primero, crear el directorio para el nuevo sitio:</p><br>
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+
+<span class="output">amin@1-bytepath:</span><span class="prompt"><~$ sudo mkdir /var/www/thebytepathchronicles</span>
+
+        </code>
+            </div>
+        </div>
+        <p>Luego, Lara asignaría los permisos correctos a este nuevo directorio para que Apache2 pudiera leer sus
+            archivos y el usuario de Amin pudiera gestionarlos.</p>
+        <p>Tras asignar www-data como usuario y grupo propietario, añadió a amin al grupo www-data y asigno a este grupo
+            permisos de escritura.</p><br>
+
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo chown -R www-data:www-data /var/www/thebytepathchronicles</span>
+<span class="output">amin@1-bytepath:</span><span>~$ sudo usermod -a -G www-data amin</span>
+<span class="output">amin@1-bytepath:</span><span>~$ sudo chmod -R 775 /var/www/thebytepathchronicles</span>
+
+        </code>
+            </div>
+        </div>
+        <p>Ahora, Lara crearía el archivo de configuración del Host Virtual. Copiaría la plantilla por defecto para
+            empezar.</p><br>
+
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/thebytepathchronicles.conf
+</span>
+        </code>
+            </div>
+        </div>
+        <p>Y, finalmente, editaría el nuevo archivo de configuración para el Host Virtual.</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo nano /etc/apache2/sites-available/thebytepathchronicles.conf
+           </span>
+<span># CONTENIDO DEL ARCHIVO /etc/apache2/sites-available/thebytepathchronicles.conf
+
+&ltVirtualHost *:80&gt
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/thebytepathchronicles
+
+    # Domain Name and Aliases
+    # ServerName thebytepathchronicles.com # Si tuvieran un dominio
+    # ServerAlias www.thebytepathchronicles.com
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    &ltDirectory /var/www/thebytepathchronicles&gt
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+    &lt/Directory&gt
+&lt/VirtualHost&gt
+</span>
+           </code>
+            </div>
+        </div>
+        <h3>Explicación de las configuraciones clave del Host Virtual:</h3>
+        <ul>
+            <li><strong>
+                    <VirtualHost *:80>
+                </strong>Define el host virtual que escuchará en el puerto 80 (el puerto estándar para HTTP).</li>
+            <li>ServerAdmin webmaster@localhost: Define la dirección de correo electrónico del administrador del
+                servidor (un placeholder por ahora).</li>
+            <li>DocumentRoot /var/www/thebytepathchronicles: Esta es la línea más importante. Le dice a Apache dónde
+                encontrar los archivos de la página web (la "raíz de documentos") para este host virtual.</li>
+            <li>ErrorLog y CustomLog: Especifican dónde Apache2 debe guardar los registros de errores y accesos para
+                este sitio.</li>
+            <li>
+                <Directory /var/www/thebytepathchronicles>: Este bloque configura opciones específicas para el
+                    directorio DocumentRoot.
+            </li>
+            <ul>
+                <li>Options Indexes FollowSymLinks: Indexes es importante aquí. Permite que, si no hay un index.html u
+                    otro archivo por defecto, Apache muestre una lista de los archivos en el directorio. (Más adelante
+                    lo deshabilitaremos por seguridad). </li>
+                <li>FollowSymLinks permite seguir enlaces simbólicos.</li>
+                <li>AllowOverride None: Impide que los archivos .htaccess sobrescriban las configuraciones del servidor.
+                    Esto es más seguro por defecto, pero limita la flexibilidad para configuraciones a nivel de
+                    directorio por parte del usuario.</li>
+                <li>Require all granted: Permite el acceso a todos los usuarios a este directorio.</li>
+            </ul>
+        </ul>
+        <p>Después de guardar el archivo de configuración del Host Virtual, Lara tuvo que habilitarlo y deshabilitar el
+            sitio por defecto de Apache para evitar conflictos.</p><br>
+
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo a2ensite thebytepathchronicles.conf
+Enabling site thebytepathchronicles.
+To activate new configuration, you need to run:
+  systemctl reload apache2
+</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo a2dissite 000-default.conf
+Disabling site 000-default.
+To activate new configuration, you need to run:
+  systemctl reload apache2
+</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo systemctl reload apache2
+</span>
+        </code>
+            </div>
+        </div>
+
+        <h2>Habilitación de Módulos Esenciales de Apache2</h2>
+
+        <p>Para su blog, Lara y Amin sabían que necesitarían equipar su servidor con funcionalidades específicas que
+            optimizaran el rendimiento y la seguridad. Era la ventaja de la modularidad: cargar solo lo esencial para
+            mantener el sistema ligero y robusto.</p>
+        <p>Tenemos el esqueleto del servidor web', dijo Lara, 'pero necesitamos darle agilidad y proteger su piel.'</p>
+        <p>Amin asintió. '¿Qué módulos son clave para nuestra guía digital?'</p>
+        <p>'Hay varios', respondió Lara. 'Pero nos centraremos en tres fundamentales que nos darán un buen equilibrio:
+            mod_headers para las cabeceras de seguridad, mod_deflate para comprimir el contenido y acelerar la carga, y
+            mod_expires para gestionar la caché del navegador.'"</p>
+        <p>Antes de empezar, Lara decidió inspeccionar qué módulos estaban disponibles y cuáles ya activos en Apache.
+            Era como revisar el inventario de herramientas antes de empezar a trabajar."</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ pache2ctl -M
+Loaded Modules:
+ core_module (static)
+ so_module (static)
+ watchdog_module (static)
+ http_module (static)
+ mpm_event_module (static)
+ authz_host_module (shared)
+ authz_core_module (shared)
+ authn_core_module (shared)
+ authn_file_module (shared)
+ access_compat_module (shared)
+ auth_basic_module (shared)
+ reqtimeout_module (shared)
+ filter_module (shared)
+ mime_module (shared)
+ log_config_module (shared)
+ env_module (shared)
+ setenvif_module (shared)
+ version_module (shared)
+ unixd_module (shared)
+ status_module (shared)
+ autoindex_module (shared)
+ dir_module (shared)
+ alias_module (shared)
+# ... (lista de módulos disponibles y/o habilitados) ...
+</span>
+        </code>
+            </div>
+        </div>
+        <h3>Módulo mod_headers: Reforzando la Seguridad</h3>
+
+        <p>El primer módulo que Lara activaría sería <strong>mod_headers.</strong> 'Este es como añadir un sello de
+            seguridad a cada paquete que enviamos', explicó Lara. 'Nos permite controlar la información que nuestro
+            servidor comparte con los navegadores, y podemos usarlo para evitar que ciertos tipos de ataques ni siquiera
+            empiecen.'</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo a2enmod headers
+Enabling module headers.
+To activate new configuration, you need to run:
+  systemctl reload apache2
+</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo systemctl reload apache2
+</span>
+        </code>
+            </div>
+        </div>
+        <h3>Módulo mod_deflate: Acelerando la Entrega</h3>
+        <p>Después de mod_headers, Lara se centró en la velocidad. 'La gente está usando terminales de todo tipo, y la
+            conectividad no es lo que era', comentó. 'Cada byte cuenta. mod_deflate nos ayudará a comprimir el contenido
+            como HTML, CSS y JavaScript antes de enviarlo. Menos datos, cargas más rápidas.'</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo a2enmod deflate
+Enabling module deflate.
+To activate new configuration, you need to run:
+  systemctl reload apache2
+        </span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo systemctl reload apache2
+    </span>
+            </code>
+            </div>
+        </div>
+        <p>La habilitación del módulo es solo el primer paso", continuó Lara. 'Ahora necesitamos decirle a mod_deflate
+            qué tipos de archivos debe comprimir. Crearemos un archivo de configuración específico para ello,
+            manteniéndolo ordenado y separado.'</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo nano /etc/apache2/conf-available/deflate.conf
+        </span>
+<span># CONTENIDO DEL ARCHIVO /etc/apache2/conf-available/deflate.conf
+
+&ltIfModule mod_deflate.c&gt
+    # Comprimir archivos de texto, HTML, CSS, JavaScript, XML, JSON, etc.
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/atom_xml
+
+    # Nivel de compresión (1-9, siendo 9 la máxima compresión)
+    # DeflateCompressionLevel 9
+
+    # Excluir algunos navegadores antiguos con problemas de compresión
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+&lt/IfModule&gt
+</span>
+        </code>
+            </div>
+        </div>
+        <h3>Explicación de las configuraciones clave en deflate.conf:</h3>
+        <ul>
+            <li><strong>
+                    <IfModule mod_deflate.c>:
+                </strong> Esta directiva asegura que las configuraciones solo se apliquen si mod_deflate está cargado.
+            </li>
+            <li><strong>DEFLATE ...:</strong> Estas líneas le dicen a Apache qué tipos de contenido (MIME types) debe
+                comprimir antes de enviarlos. Incluyen tipos comunes como HTML, CSS, JavaScript, y XML.</li>
+            <li><strong>DeflateCompressionLevel:</strong> (Comentado, pero importante de mencionar) Define el nivel de
+                compresión. Un nivel más alto significa mayor compresión pero mayor uso de CPU. Lara optó por la
+                configuración por defecto de Apache para empezar, que es un buen equilibrio.</li>
+            <li><strong>BrowserMatch:</strong> Estas líneas son para la compatibilidad con navegadores antiguos que
+                podrían tener problemas con la compresión GZIP.</li>
+
+        </ul>
+        <p>'Una vez configurado el módulo', dijo Lara, 'hay que decirle a Apache que lo use.'</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo a2enconf deflate.conf
+Enabling conf deflate.
+To activate new configuration, you need to run:
+  systemctl reload apache2
+        </span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo systemctl reload apache2
+    </span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$</span>
+        </code>
+            </div>
+        </div>
+        <h3>Módulo mod_expires: Optimizando la Caché del Navegador</h3>
+        <p>El último módulo que Lara consideró esencial para el rendimiento de su blog fue mod_expires. 'Imagina que
+            alguien visita nuestra guía', explicó. 'No queremos que su navegador tenga que descargar las mismas imágenes
+            o archivos CSS cada vez. mod_expires le dirá a su navegador cuánto tiempo puede guardar esos archivos en su
+            caché local. Esto no solo hace que el sitio se sienta instantáneo para visitas repetidas, sino que también
+            reduce la carga de nuestro servidor.'</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo a2enmod expires
+Enabling module expires.
+To activate new configuration, you need to run:
+  systemctl reload apache2</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo systemctl reload apache2</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$</span>
+        </code>
+            </div>
+        </div>
+        <p>'Y, como con mod_deflate, este módulo también necesita su propia configuración', continuó Lara. 'Crearemos
+            expires.conf para detallar las políticas de caché.'</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo nano /etc/apache2/conf-available/expires.conf</span>
+<span># CONTENIDO DEL ARCHIVO /etc/apache2/conf-available/expires.conf
+
+&ltIfModule mod_expires.c&gt
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    ExpiresByType text/html "access plus 0 seconds"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 month"
+&lt/IfModule&gt
+</span>
+        </code>
+            </div>
+        </div>
+        <h3>Explicación de las configuraciones clave en expires.conf:</h3>
+        <ul>
+            <li>&lt;IfModule mod_expires.c&gt;: Como antes, asegura que las directivas se apliquen solo si el módulo
+                está activo.</li>
+            <li>ExpiresActive On: Activa la funcionalidad de mod_expires.</li>
+            <li>ExpiresDefault "access plus 1 month": Establece una política de caché predeterminada para todos los
+                archivos no especificados: expiran después de un mes desde su último acceso.</li>
+            <li>ExpiresByType ...: Estas líneas personalizan las políticas de caché para tipos de archivos específicos:
+            </li>
+            <ul>
+                <li>text/html "access plus 0 seconds": Los archivos HTML (la página principal del blog) no se cachean o
+                    se consideran "frescos" solo por un instante, forzando al navegador a verificar si hay una nueva
+                    versión cada vez. Esto es bueno para contenido dinámico o que cambia a menudo.</li>
+                <li>text/css, application/javascript: Archivos CSS y JavaScript se cachean durante una semana, ya que no
+                    suelen cambiar tan a menudo.</li>
+                <li>image/jpeg, image/png, image/gif, image/webp, image/x-icon: Las imágenes y los iconos se cachean
+                    durante un mes, dado que suelen ser estáticas y no cambian frecuentemente.</li>
+
+            </ul>
+        </ul>
+        <p>'Con las políticas de caché definidas, el último paso es activarlas,' dijo Lara.</p><br>
+        <div class="code-block terminal-simulation">
+            <div class="terminal-header">
+                <span class="terminal-button close">&#x2715;</span> <span
+                    class="terminal-button minimize">&#x25BE;</span> <span
+                    class="terminal-button maximize">&#x25B2;</span> <span class="terminal-title">Leyenda</span>
+            </div>
+            <div class="terminal-code-content">
+                <code class="language-bash">
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo a2enconf expires.conf
+Enabling conf expires.
+To activate new configuration, you need to run:
+  systemctl reload apache2</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$  sudo apache2ctl configtest
+Syntax OK</span>
+<span class="output">amin@1-bytepath:</span><span class="prompt">~$ sudo systemctl reload apache2
+    </span>
+        </code>
+            </div>
+        </div>
+        <p>Antes de recargar, Lara ejecutó una prueba de sintaxis para asegurarse de que no hubiera errores en la
+            configuración de Apache, obteniendo un tranquilizador Syntax OK. Este es un paso de seguridad vital antes de
+            aplicar cambios importantes.</p>
+        <p>El servidor ahora no solo estaba protegido por UFW y Fail2ban, sino que Apache2 estaba listo para servir su
+            contenido de manera eficiente y con las bases de seguridad necesarias. </p>
+        <!-- FLECHAS PREV/NEXT -->
+        <div class="article-navigation">
+            <a href="seguridad_basica.html" class="nav-arrow-prev" id="prev-chapter-link" <h3>PREV..</h3></a>
+
+            <a href="apache2-seg.html" class="nav-arrow-next" id="next-chapter-link" <h3>NEXT..</h3></a>
+        </div>
+
+
+
+
+    </main>
+
+
+
+
+    <footer>
+        <div class="social-links">
+                <a href="" target="_blank" aria-label="Mi perfil de LinkedIn">LinkedIn</a>
+                <a href="" target="_blank" aria-label="Mi perfil de GitHub">GitHub</a>
+        </div>
+        <p>
+            &copy; 2025 Ruben Riau Vicente. The BytePath Chronicles. Contenido bajo 
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">Licencia CC 4.0</a>
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank"
+                rel="license noopener noreferrer">
+                <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png"
+                    alt="Licencia Creative Commons Atribución-Compartir Igual 4.0 Internacional" class="cc-button">
+            </a>
+        </p>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const article = document.querySelector('.contenido'); // Selecciona tu artículo
+            if (article) {
+                // Espera X milisegundos (ej. 1500 = 1.5 segundos) antes de añadir la clase
+                setTimeout(() => {
+                    article.classList.add('contenido-visible'); // ¡Añade la nueva clase aquí!
+                }, 500); // Ajusta este tiempo de retardo inicial como prefieras
+            }
+        });
+    </script>
+
+</body>
+
+</html>
