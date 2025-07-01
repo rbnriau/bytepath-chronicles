@@ -47,7 +47,7 @@
                 <img src="/imagenes/varios/escudo_azul.svg" alt="Logo de The BytePath Chronicles" class="site-logo">
             </a>
             <div class="site-title">The BytePath Chronicles</div>
-            
+
         </div>
         <nav class="main-nav">
             <ul>
@@ -325,17 +325,23 @@ drwxr-xr-x 2 root adm 4096 Jun  11 10:00 /var/log/apache2
         </code>
             </div>
         </div>
-        <p>'Esta configuración del directorio es excelente,' explicó Lara. 'Asegura que solo <strong>root</strong> pueda modificar la
+        <p>'Esta configuración del directorio es excelente,' explicó Lara. 'Asegura que solo <strong>root</strong> pueda
+            modificar la
             estructura del directorio de logs'. </p>
         <p>Amin, mientras tanto, había estado revisando el contenido de los archivos de log. 'Mira, Lara,'' dijo,
-            señalando la pantalla de su terminal. 'El <strong>access.log</strong> y el <strong>error.log</strong> sí tienen contenido. Veo las
+            señalando la pantalla de su terminal. 'El <strong>access.log</strong> y el <strong>error.log</strong> sí
+            tienen contenido. Veo las
             peticiones de prueba que hicimos, con la IP y la hora. Se están registrando correctamente.'</p>
-        <p>'Esto es un detalle técnico importante que a menudo genera confusión,' le dijo Lara a Amin. 'Aunque el usuario
-            <strong>www-data</strong> es quien maneja las peticiones web en los procesos hijos de Apache, no es www-data quien
-            escribe directamente en los archivos de log finales como <strong>access.log o error.log</strong>.'</p>
+        <p>'Esto es un detalle técnico importante que a menudo genera confusión,' le dijo Lara a Amin. 'Aunque el
+            usuario
+            <strong>www-data</strong> es quien maneja las peticiones web en los procesos hijos de Apache, no es www-data
+            quien
+            escribe directamente en los archivos de log finales como <strong>access.log o error.log</strong>.'
+        </p>
         <p>'Quien realmente escribe esos logs es el proceso padre principal de Apache,' continuó, 'y ese proceso siempre
             se ejecuta como root.'</p>
-        <p>'Para nosotros,' continuó Lara, 'simplemente utilizaremos <strong>sudo</strong> cuando necesitemos revisar los logs
+        <p>'Para nosotros,' continuó Lara, 'simplemente utilizaremos <strong>sudo</strong> cuando necesitemos revisar
+            los logs
             directamente, como ya has hecho'.</p>
         <h2>Desactivando Módulos Innecesarios de Apache2</h2>
         <p>'Apache2 es como una navaja suiza, viene con herramientas para todo tipo de escenarios', explicó Lara a Amin.
@@ -394,7 +400,8 @@ Loaded Modules:
         </div>
 
         <p>'Hay varios módulos que podemos desactivar de forma segura para un blog típico', explicó Lara. 'El más obvio
-            que ya no necesitamos es <strong>mod_autoindex</strong>. Lo usamos para visualizar directorios antes de configurar el
+            que ya no necesitamos es <strong>mod_autoindex</strong>. Lo usamos para visualizar directorios antes de
+            configurar el
             host virtual, pero ahora que tenemos una página principal y ya deshabilitamos los índices, no hace falta. Lo
             deshabilitaremos forzosamente por si acaso, para asegurarnos de que se vaya.'</p><br>
         <div class="code-block terminal-simulation">
@@ -413,7 +420,8 @@ To activate new configuration, you need to run:
     </code>
             </div>
         </div>
-        <p>'Otro módulo que podemos considerar desactivar es <strong>mod_status</strong>', dijo Lara. 'Este módulo es útil para
+        <p>'Otro módulo que podemos considerar desactivar es <strong>mod_status</strong>', dijo Lara. 'Este módulo es
+            útil para
             monitorear el rendimiento del servidor Apache, pero expone información sobre el estado y las peticiones
             activas. Si no vamos a usarlo de forma constante o si no está protegido adecuadamente, es mejor desactivarlo
             para no exponer información interna.'</p><br>
@@ -433,7 +441,8 @@ To activate new configuration, you need to run:
     </code>
             </div>
         </div>
-        <p>'Y un módulo más que no necesitamos es <strong>mod_access_compat</strong>', añadió Lara. 'Este módulo proporciona
+        <p>'Y un módulo más que no necesitamos es <strong>mod_access_compat</strong>', añadió Lara. 'Este módulo
+            proporciona
             compatibilidad con las antiguas directivas de control de acceso de Apache (como Order, Deny, Allow). Ya
             estamos usando las directivas más modernas y seguras (Require en Apache 2.4+), así que este módulo es
             redundante y puede ser desactivado.'</p><br>
@@ -468,7 +477,8 @@ Syntax OK
             sino también vigilar quién intentaba abrir esas puertas. Los logs, ese diario de a bordo que habían
             asegurado tan cuidadosamente, eran ahora su principal herramienta de observación. Era como tener cámaras de
             seguridad en cada rincón de su fortaleza digital.</p>
-        <p>Con la opción <strong>-f (follow), tail</strong> te muestra las nuevas líneas que se añaden al archivo en tiempo real, como si
+        <p>Con la opción <strong>-f (follow), tail</strong> te muestra las nuevas líneas que se añaden al archivo en
+            tiempo real, como si
             estuvieras viendo una pantalla de videovigilancia</p><br>
         <div class="code-block terminal-simulation">
             <div class="terminal-header">
@@ -519,7 +529,8 @@ sudo tail -f /var/log/apache2/error.log
                 </div>
             </div>
         </ul>
-        <p>'La monitorización constante, aunque sea de forma sencilla con tail, es un pilar fundamental de la seguridad',
+        <p>'La monitorización constante, aunque sea de forma sencilla con tail, es un pilar fundamental de la
+            seguridad',
             concluyó Lara. 'Nos permite reaccionar rápidamente ante cualquier anomalía y entender mejor el
             comportamiento de nuestra web.'</p>
         <p>El sol comenzaba a despedirse del horizonte, tiñendo el cielo de tonos anaranjados. En la pequeña y segura
@@ -533,9 +544,9 @@ sudo tail -f /var/log/apache2/error.log
             es solo el comienzo de nuestra vigilancia.'</p>
 
         <!-- FLECHAS PREV/NEXT -->
-         
+
         <div class="article-navigation">
-            <a href="apache2.html" class="nav-arrow-prev" id="prev-chapter-link" <h3>PREV..</h3></a>
+            <a href="/apache2.html" class="nav-arrow-prev" id="prev-chapter-link" <h3>PREV..</h3></a>
 
             <a class="nav-arrow-next" id="next-chapter-link" <h3>NEXT..</h3></a>
         </div>
@@ -549,11 +560,16 @@ sudo tail -f /var/log/apache2/error.log
 
     <footer>
         <div class="social-links">
-                <a href="" target="_blank" aria-label="Mi perfil de LinkedIn">LinkedIn</a>
-                <a href="" target="_blank" aria-label="Mi perfil de GitHub">GitHub</a>
+            <a href="https://www.linkedin.com/in/ruben-riau-vicente-304687370/" target="_blank"
+                rel="noopener noreferrer" aria-label="Perfil de LinkedIn de Ruben Riau Vicente">
+                LinkedIn
+            </a>
+
+            <a href="https://github.com/rbnriau/bytepath-chronicles" target="_blank"
+                rel="noopener noreferrer">GitHub</a>
         </div>
         <p>
-            &copy; 2025 Ruben Riau Vicente. The BytePath Chronicles. Contenido bajo 
+            &copy; 2025 Ruben Riau Vicente. The BytePath Chronicles. Contenido bajo
             <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">Licencia CC 4.0</a>
             <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank"
                 rel="license noopener noreferrer">
