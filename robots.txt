@@ -1,5 +1,5 @@
 User-agent: *
 Disallow: /admin/
 Allow: /
-Sitemap: https://thebytepathchronicles.es/sitemap.xml
+Sitemap: https://www.thebytepathchronicles.es/sitemap.xml
 
