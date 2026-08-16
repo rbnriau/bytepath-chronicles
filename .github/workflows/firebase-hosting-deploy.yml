@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   build_and_deploy:
-    runs-proxy: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: FirebaseExtended/action-hosting-deploy@v0
